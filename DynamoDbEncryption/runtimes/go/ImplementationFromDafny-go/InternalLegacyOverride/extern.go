@@ -5,8 +5,6 @@ import (
 	"github.com/aws/aws-database-encryption-sdk-dynamodb/awscryptographydbencryptionsdkdynamodbitemencryptorsmithygeneratedtypes"
 )
 
-// var Companion_InternalLegacyOverride_ = CompanionStruct_Default___{}
-
 func (CompanionStruct_InternalLegacyOverride_) Build(config interface{}) Wrappers.Result {
 	// Create error for unsupported legacy configuration
 	err := &awscryptographydbencryptionsdkdynamodbitemencryptorsmithygeneratedtypes.DynamoDbItemEncryptorException{
