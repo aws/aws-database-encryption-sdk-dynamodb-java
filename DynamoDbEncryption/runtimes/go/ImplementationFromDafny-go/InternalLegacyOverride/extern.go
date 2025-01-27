@@ -8,7 +8,6 @@ import (
 
 var policy = AwsCryptographyDbEncryptionSdkDynamoDbTypes.Companion_LegacyPolicy_.Create_FORBID__LEGACY__ENCRYPT__FORBID__LEGACY__DECRYPT_()
 
-// policy := Create_FORCE__LEGACY__ENCRYPT__ALLOW__LEGACY__DECRYPT_()
 func (InternalLegacyOverride) Policy() AwsCryptographyDbEncryptionSdkDynamoDbTypes.LegacyPolicy {
 	return policy
 }
