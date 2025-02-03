@@ -65,6 +65,8 @@ PROJECT_INDEX := \
 	submodules/MaterialProviders/TestVectorsAwsCryptographicMaterialProviders/dafny/KeyVectors/src/Index.dfy \
 	DynamoDbEncryption/dafny/StructuredEncryption/src/Index.dfy \
 	DynamoDbEncryption/dafny/DynamoDbEncryption/src/Index.dfy \
+	DynamoDbEncryption/dafny/DynamoDbItemEncryptor/src/Index.dfy \
+	DynamoDbEncryption/dafny/DynamoDbEncryptionTransforms/src/Index.dfy \
 
 STD_LIBRARY=submodules/MaterialProviders/StandardLibrary
 SMITHY_DEPS=submodules/MaterialProviders/model
