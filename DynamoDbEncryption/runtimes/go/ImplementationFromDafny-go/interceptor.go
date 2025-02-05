@@ -56,7 +56,8 @@ func (m DbEsdkMiddleware) createRequestInterceptor() middleware.InitializeMiddle
 
 // handleRequestInterception handles the interception logic before the DynamoDB operation
 func (m DbEsdkMiddleware) handleRequestInterception(ctx context.Context, params interface{}) context.Context {
-	if v, ok := params.(*dynamodb.PutItemInput); ok {
+	switch v := params.(type) {
+	case *dynamodb.PutItemInput:
 		ctx = middleware.WithStackValue(ctx, "originalInput", *DeepCopyPutItemInput(v))
 		transformedRequest, err := m.client.PutItemInputTransform(context.TODO(), awscryptographydbencryptionsdkdynamodbtransformssmithygeneratedtypes.PutItemInputTransformInput{
 			SdkInput: *v,
@@ -65,8 +66,7 @@ func (m DbEsdkMiddleware) handleRequestInterception(ctx context.Context, params 
 			fmt.Println(err)
 		}
 		*v = transformedRequest.TransformedInput
-	}
-	if v, ok := params.(*dynamodb.GetItemInput); ok {
+	case *dynamodb.GetItemInput:
 		ctx = middleware.WithStackValue(ctx, "originalInput", *DeepCopyGetItemInput(v))
 		transformedRequest, err := m.client.GetItemInputTransform(context.TODO(), awscryptographydbencryptionsdkdynamodbtransformssmithygeneratedtypes.GetItemInputTransformInput{
 			SdkInput: *v,
@@ -75,15 +75,8 @@ func (m DbEsdkMiddleware) handleRequestInterception(ctx context.Context, params 
 			fmt.Println(err)
 		}
 		*v = transformedRequest.TransformedInput
-	}
-	if v, ok := params.(*dynamodb.BatchExecuteStatementInput); ok {
-		BatchExecuteStatementInputTransformOutput, err := m.client.BatchExecuteStatementInputTransform(context.TODO(), awscryptographydbencryptionsdkdynamodbtransformssmithygeneratedtypes.BatchExecuteStatementInputTransformInput{
-			SdkInput: *v,
-		})
-		if err != nil {
-			fmt.Println(err)
-		}
-		*v = BatchExecuteStatementInputTransformOutput.TransformedInput
+		// case *dynamodb.BatchExecuteStatementInput:
+		// 	m.originalRequests["BatchExecuteStatementInput"] = *DeepCopyBatchExecuteStatementInput(v)
 	}
 	return ctx
 }
@@ -108,7 +101,8 @@ func (m DbEsdkMiddleware) createResponseInterceptor() middleware.FinalizeMiddlew
 
 // handleResponseInterception handles the interception logic after the DynamoDB operation
 func (m DbEsdkMiddleware) handleResponseInterception(ctx context.Context, response interface{}) {
-	if v, ok := response.(*dynamodb.PutItemOutput); ok {
+	switch v := response.(type) {
+	case *dynamodb.PutItemOutput:
 		transformedRequest, err := m.client.PutItemOutputTransform(context.TODO(), awscryptographydbencryptionsdkdynamodbtransformssmithygeneratedtypes.PutItemOutputTransformInput{
 			OriginalInput: middleware.GetStackValue(ctx, "originalInput").(dynamodb.PutItemInput),
 			SdkOutput:     *v,
@@ -117,8 +111,7 @@ func (m DbEsdkMiddleware) handleResponseInterception(ctx context.Context, respon
 			fmt.Println(err)
 		}
 		*v = transformedRequest.TransformedOutput
-	}
-	if v, ok := response.(*dynamodb.GetItemOutput); ok {
+	case *dynamodb.GetItemOutput:
 		transformedRequest, err := m.client.GetItemOutputTransform(context.TODO(), awscryptographydbencryptionsdkdynamodbtransformssmithygeneratedtypes.GetItemOutputTransformInput{
 			OriginalInput: middleware.GetStackValue(ctx, "originalInput").(dynamodb.GetItemInput),
 			SdkOutput:     *v,
@@ -128,23 +121,7 @@ func (m DbEsdkMiddleware) handleResponseInterception(ctx context.Context, respon
 		}
 		*v = transformedRequest.TransformedOutput
 	}
-	// if getItemOutput, ok := response.(*dynamodb.GetItemOutput); ok {
-	// 	fmt.Println("GetItemOutput Response intercepted:")
-	// 	if age, ok := getItemOutput.Item["Age"].(*types.AttributeValueMemberN); ok {
-	// 		fmt.Println("Age:", age.Value)
-	// 	}
-	// 	if id, ok := getItemOutput.Item["ID"].(*types.AttributeValueMemberN); ok {
-	// 		fmt.Println("ID:", id.Value)
-	// 	}
-	// 	if name, ok := getItemOutput.Item["Name"].(*types.AttributeValueMemberS); ok {
-	// 		fmt.Println("Name:", name.Value)
-	// 	}
-	// 	if intercepted, ok := getItemOutput.Item["intercepted attribute"].(*types.AttributeValueMemberS); ok {
-	// 		fmt.Println("intercepted attribute:", intercepted.Value)
-	// 	}
-	// 	getItemOutput.Item["intercepted attribute"] = &types.AttributeValueMemberS{Value: "I read your data "}
-	// 	// You can modify the response here if needed
-	// }
+
 }
 
 // DeepCopyPutItemInput performs a deep copy of a PutItemInput struct.
