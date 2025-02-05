@@ -15,7 +15,7 @@ import (
 
 	mpl "github.com/aws/aws-cryptographic-material-providers-library/releases/go/mpl/awscryptographymaterialproviderssmithygenerated"
 	mpltypes "github.com/aws/aws-cryptographic-material-providers-library/releases/go/mpl/awscryptographymaterialproviderssmithygeneratedtypes"
-	dynamodbESDK "github.com/aws/aws-database-encryption-sdk-dynamodb"
+	"github.com/aws/aws-database-encryption-sdk-dynamodb/dbesdkmiddleware"
 )
 
 func main() {
@@ -81,7 +81,10 @@ func putItemGetItem() error {
 		TableEncryptionConfigs: tableConfigsMap,
 	}
 	// 4. Create encrypted DynamoDB client
-	dbEsdkMiddleware, err := dynamodbESDK.NewDbEsdkMiddleware(listOfTableConfigs)
+	dbEsdkMiddleware, err := dbesdkmiddleware.NewDBEsdkMiddleware(listOfTableConfigs)
+	if err != nil {
+		panic(err)
+	}
 	ddb := dynamodb.NewFromConfig(cfg, dbEsdkMiddleware.CreateMiddleware())
 
 	// 5. Put an encrypted item
