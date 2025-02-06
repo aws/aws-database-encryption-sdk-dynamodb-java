@@ -5,7 +5,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
-// Deep Copy PutItemInput performs a deep copy of a PutItemInput struct.
+// deepCopyPutItemInput performs a deep copy of a PutItemInput struct.
 func deepCopyPutItemInput(input *dynamodb.PutItemInput) *dynamodb.PutItemInput {
 	if input == nil {
 		return nil
@@ -58,7 +58,7 @@ func deepCopyPutItemInput(input *dynamodb.PutItemInput) *dynamodb.PutItemInput {
 	}
 }
 
-// Deep copy GetItemInput performs a deep copy of a GetItemInput struct.
+// deepCopyGetItemInput performs a deep copy of a GetItemInput struct.
 func deepCopyGetItemInput(input *dynamodb.GetItemInput) *dynamodb.GetItemInput {
 	if input == nil {
 		return nil
@@ -106,7 +106,7 @@ func deepCopyGetItemInput(input *dynamodb.GetItemInput) *dynamodb.GetItemInput {
 	}
 }
 
-// Deep Copy GetItemInput performs a deep copy of a BatchGetItemInput struct.
+// deepCopyBatchGetItemInput performs a deep copy of a BatchGetItemInput struct.
 func deepCopyBatchGetItemInput(input *dynamodb.BatchGetItemInput) *dynamodb.BatchGetItemInput {
 	if input == nil {
 		return nil
@@ -124,7 +124,7 @@ func deepCopyBatchGetItemInput(input *dynamodb.BatchGetItemInput) *dynamodb.Batc
 	}
 }
 
-// DeepCopyBatchExecuteStatementInput performs a deep copy of a BatchExecuteStatementInput struct.
+// deepCopyBatchExecuteStatementInput performs a deep copy of a BatchExecuteStatementInput struct.
 func deepCopyBatchExecuteStatementInput(input *dynamodb.BatchExecuteStatementInput) *dynamodb.BatchExecuteStatementInput {
 	if input == nil {
 		return nil
@@ -141,7 +141,7 @@ func deepCopyBatchExecuteStatementInput(input *dynamodb.BatchExecuteStatementInp
 	}
 }
 
-// DeepCopyBatchWriteItemInput performs a deep copy of a BatchWriteItemInput struct.
+// deepCopyBatchWriteItemInput performs a deep copy of a BatchWriteItemInput struct.
 func deepCopyBatchWriteItemInput(input *dynamodb.BatchWriteItemInput) *dynamodb.BatchWriteItemInput {
 	if input == nil {
 		return nil
@@ -163,7 +163,7 @@ func deepCopyBatchWriteItemInput(input *dynamodb.BatchWriteItemInput) *dynamodb.
 	}
 }
 
-// DeepCopyDeleteItemInput performs a deep copy of a DeleteItemInput struct.
+// deepCopyDeleteItemInput performs a deep copy of a DeleteItemInput struct.
 func deepCopyDeleteItemInput(input *dynamodb.DeleteItemInput) *dynamodb.DeleteItemInput {
 	if input == nil {
 		return nil
@@ -209,7 +209,7 @@ func deepCopyDeleteItemInput(input *dynamodb.DeleteItemInput) *dynamodb.DeleteIt
 	}
 }
 
-// DeepCopyExecuteStatementInput performs a deep copy of an ExecuteStatementInput struct.
+// deepCopyExecuteStatementInput performs a deep copy of an ExecuteStatementInput struct.
 func deepCopyExecuteStatementInput(input *dynamodb.ExecuteStatementInput) *dynamodb.ExecuteStatementInput {
 	if input == nil {
 		return nil
@@ -253,7 +253,7 @@ func deepCopyExecuteStatementInput(input *dynamodb.ExecuteStatementInput) *dynam
 	}
 }
 
-// DeepCopyExecuteTransactionInput performs a deep copy of an ExecuteTransactionInput struct.
+// deepCopyExecuteTransactionInput performs a deep copy of an ExecuteTransactionInput struct.
 func deepCopyExecuteTransactionInput(input *dynamodb.ExecuteTransactionInput) *dynamodb.ExecuteTransactionInput {
 	if input == nil {
 		return nil
@@ -277,7 +277,7 @@ func deepCopyExecuteTransactionInput(input *dynamodb.ExecuteTransactionInput) *d
 	}
 }
 
-// DeepCopyQueryInput performs a deep copy of a QueryInput struct.
+// deepCopyQueryInput performs a deep copy of a QueryInput struct.
 func deepCopyQueryInput(input *dynamodb.QueryInput) *dynamodb.QueryInput {
 	if input == nil {
 		return nil
@@ -360,7 +360,7 @@ func deepCopyQueryInput(input *dynamodb.QueryInput) *dynamodb.QueryInput {
 	}
 }
 
-// DeepCopyScanInput performs a deep copy of a ScanInput struct.
+// deepCopyScanInput performs a deep copy of a ScanInput struct.
 func deepCopyScanInput(input *dynamodb.ScanInput) *dynamodb.ScanInput {
 	if input == nil {
 		return nil
@@ -442,7 +442,7 @@ func deepCopyScanInput(input *dynamodb.ScanInput) *dynamodb.ScanInput {
 	}
 }
 
-// DeepCopyTransactGetItemsInput performs a deep copy of a TransactGetItemsInput struct.
+// deepCopyTransactGetItemsInput performs a deep copy of a TransactGetItemsInput struct.
 func deepCopyTransactGetItemsInput(input *dynamodb.TransactGetItemsInput) *dynamodb.TransactGetItemsInput {
 	if input == nil {
 		return nil
@@ -486,7 +486,7 @@ func deepCopyTransactWriteItemsInput(input *dynamodb.TransactWriteItemsInput) *d
 	}
 }
 
-// DeepCopyUpdateItemInput performs a deep copy of an UpdateItemInput struct.
+// deepCopyUpdateItemInput performs a deep copy of an UpdateItemInput struct.
 func deepCopyUpdateItemInput(input *dynamodb.UpdateItemInput) *dynamodb.UpdateItemInput {
 	if input == nil {
 		return nil
