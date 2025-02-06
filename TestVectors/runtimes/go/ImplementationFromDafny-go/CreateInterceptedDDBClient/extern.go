@@ -5,9 +5,9 @@ import (
 
 	"github.com/aws/aws-cryptographic-material-providers-library/releases/go/dynamodb/DynamoDBwrapped"
 	"github.com/aws/aws-cryptographic-material-providers-library/releases/go/smithy-dafny-standard-library/Wrappers"
-	ddb "github.com/aws/aws-database-encryption-sdk-dynamodb"
 	"github.com/aws/aws-database-encryption-sdk-dynamodb/AwsCryptographyDbEncryptionSdkDynamoDbTypes"
 	"github.com/aws/aws-database-encryption-sdk-dynamodb/awscryptographydbencryptionsdkdynamodbsmithygenerated"
+	"github.com/aws/aws-database-encryption-sdk-dynamodb/dbesdkmiddleware"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
@@ -38,7 +38,7 @@ func CreateInterceptedDDBClient(ddbEncryptionConfig AwsCryptographyDbEncryptionS
 		panic(err)
 	}
 	nativeConfig := awscryptographydbencryptionsdkdynamodbsmithygenerated.DynamoDbTablesEncryptionConfig_FromDafny(ddbEncryptionConfig)
-	dbEsdkMiddleware, err := ddb.NewDbEsdkMiddleware(nativeConfig)
+	dbEsdkMiddleware, err := dbesdkmiddleware.NewDBEsdkMiddleware(nativeConfig)
 	ddbClient := dynamodb.NewFromConfig(cfg, dbEsdkMiddleware.CreateMiddleware())
 	return Wrappers.Companion_Result_.Create_Success_(&DynamoDBwrapped.Shim{
 		Client: ddbClient,
